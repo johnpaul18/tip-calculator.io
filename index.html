@@ -238,7 +238,7 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div role="main" class="container">
       <div class="splitter">
         <p>SPLI <br />TTER</p>
       </div>
@@ -253,6 +253,7 @@
               <input
                 type="text"
                 id="bill"
+                placeholder="0"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); getTip();"
               />
             </div>
