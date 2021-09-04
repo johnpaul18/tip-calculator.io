@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Tip calculator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        background-color: #c4e4e7;
+        font-size: 12px;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      .splitter {
+        color: hsl(186, 14%, 43%);
+        font-size: 24px;
+        display: flex;
+        height: 30vh;
+        justify-content: center;
+        align-items: center;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        padding: 20px;
+      }
+      .container {
+        min-height: 100vh;
+        width: auto;
+        background-color: #c4e4e7;
+        position: relative;
+        font-family: "Space Mono", monospace;
+      }
+      .card {
+        display: flex;
+        flex-direction: row;
+        border-radius: 15px;
+        background-color: #ffffff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        padding: 20px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      }
+      .bill {
+        color: hsl(184, 14%, 56%);
+        font-weight: 700;
+        position: relative;
+      }
+      .bill:nth-child(1) {
+        margin-top: 20px;
+      }
+      .bill:nth-child(1),
+      .bill:nth-child(2) {
+        margin-bottom: 30px;
+      }
+      .bill-input {
+        position: relative;
+      }
+      label {
+        position: absolute;
+        top: 50%;
+        left: 3%;
+        transform: translate(-3%, -50%);
+      }
+      input {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        background-color: #f3f8fb;
+        color: #06474d;
+        border: none;
+        font-size: 24px;
+        text-align: right;
+        padding: 5px;
+        width: 100%;
+        outline-color: #2dc2ae;
+        border-radius: 3px;
+      }
+      .bill > p {
+        margin-bottom: 3px;
+      }
+      .bill > p:nth-child(2) {
+        position: absolute;
+        right: 0;
+        top: 0;
+        visibility: hidden;
+        color: red;
+      }
+      .tip-input {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 33% 33% 33%;
+      }
+      .tip-input > input {
+        text-align: center;
+        box-sizing: border-box;
+      }
+      ::placeholder {
+        color: #06474d;
+        opacity: 0.5;
+      }
+      button {
+        font-family: "Space Mono", monospace;
+        font-size: 24px;
+        padding: 5px;
+        text-align: center;
+        background-color: #00474b;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+      }
+
+      .col {
+        width: 375px;
+        margin: 20px;
+      }
+      .out {
+        box-sizing: border-box;
+        padding: 30px;
+        background-color: #00474b;
+        border-radius: 15px;
+        position: relative;
+      }
+      .bill-out {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+      }
+      .bill-label > p:nth-child(1) {
+        color: #fff;
+      }
+      .bill-label > p:nth-child(2) {
+        color: hsl(186, 14%, 43%);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #2dc2ae;
+      }
+      .out > button {
+        width: 80%;
+        color: #00474b;
+        font-weight: 700;
+        background-color: #2dc2ae;
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -90%);
+      }
+      #resetBtn:hover {
+        background-color: hsl(185, 41%, 84%);
+      }
+
+      @media only screen and (max-width: 600px) {
+        .out,
+        .col,
+        .out > button {
+          position: static;
+          transform: translate(0, 0);
+        }
+        .container {
+          position: relative;
+          height: auto;
+          padding: 0;
+        }
+        .splitter {
+          height: auto;
+        }
+
+        .card {
+          position: static;
+          transform: translate(0, 0);
+          margin-top: 20px;
+          bottom: 0;
+          min-width: 100%;
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+          padding-bottom: 20px;
+          margin: 0;
+          border-radius: 30px;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+          overflow: hidden;
+        }
+        button,
+        input,
+        h2 {
+          font-size: 16px;
+        }
+        .col {
+          width: 100%;
+          box-sizing: border-box;
+          margin: auto;
+        }
+        .in {
+          padding: 30px;
+        }
+        .bill-out {
+          width: 80%;
+        }
+        .out {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 10px;
+          width: 90%;
+          box-sizing: border-box;
+        }
+        .out > button {
+          width: 70%;
+          margin: auto;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="splitter">
+        <p>SPLI <br />TTER</p>
+      </div>
+      <div class="card">
+        <div class="col in">
+          <div class="bill">
+            <p>Bill</p>
+            <div class="bill-input">
+              <label for="">
+                <img src="./images/icon-dollar.svg" alt="" />
+              </label>
+              <input
+                type="text"
+                id="bill"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); getTip();"
+              />
+            </div>
+          </div>
+          <div class="bill">
+            <p>Select Tip %</p>
+            <div class="tip-input">
+              <button
+                class="tip-btn"
+                onfocus="btnActive(this)"
+                value="0.5"
+                onclick="tipPercent = this.value"
+              >
+                5%
+              </button>
+              <button
+                class="tip-btn"
+                onfocus="btnActive(this)"
+                value="0.10"
+                onclick="tipPercent = this.value"
+              >
+                10%
+              </button>
+              <button
+                class="tip-btn"
+                onfocus="btnActive(this)"
+                value="0.15"
+                onclick="tipPercent = this.value"
+              >
+                15%
+              </button>
+              <button
+                class="tip-btn"
+                onfocus="btnActive(this)"
+                value="0.25"
+                onclick="tipPercent = this.value"
+              >
+                25%
+              </button>
+              <button
+                class="tip-btn"
+                onfocus="btnActive(this)"
+                value="0.50"
+                onclick="tipPercent = this.value"
+              >
+                50%
+              </button>
+              <input id="customTip" type="text" placeholder="Custom" />
+            </div>
+          </div>
+          <div class="bill">
+            <p>Number of People</p>
+            <p>can't be zero</p>
+            <div class="bill-input">
+              <label for="">
+                <img src="./images/icon-person.svg" alt="" />
+              </label>
+              <input
+                type="text"
+                placeholder="0"
+                id="numberOfPerson"
+                onfocus="checkValue(this)"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); checkValue(this);"
+                onblur="if(this.value > 0)this.style.border = 'none'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col out">
+          <div class="bill-out">
+            <div class="bill-label">
+              <p>Tip Amount</p>
+              <p>/person</p>
+            </div>
+            <h2 id="tipAmount">$0.00</h2>
+          </div>
+          <div class="bill-out">
+            <div class="bill-label">
+              <p>Total</p>
+              <p>/ person</p>
+            </div>
+            <h2 id="total">$0.00</h2>
+          </div>
+          <button
+            id="resetBtn"
+            onclick="reset(this)"
+            disabled
+            style="opacity: 0.5"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="https://www.facebook.com/johnpaul.alimango.5"
+        >John Paul C. Alimango</a
+      >.
+    </div>
+    <script>
+      let lastBtn;
+      let tipPercent = 0;
+
+      const getTip = () => {
+        const numberOfPerson = document.getElementById("numberOfPerson").value;
+        const bill = document.getElementById("bill").value;
+        const resetBtn = document.getElementById("resetBtn");
+
+        if (resetBtn.disabled) {
+          resetBtn.disabled = !resetBtn.disabled;
+          resetBtn.style.opacity = "1";
+        }
+
+        if (numberOfPerson <= 0) {
+          document.getElementById("tipAmount").textContent = `$0`;
+          document.getElementById("total").textContent = `$0`;
+          return;
+        }
+        const tip = document.getElementById("customTip").value
+          ? `.${document.getElementById("customTip").value}`
+          : tipPercent;
+
+        const tipAmount = (bill / numberOfPerson) * tip;
+        const total = bill / numberOfPerson + tipAmount;
+
+        console.log(tipAmount);
+
+        document.getElementById(
+          "tipAmount"
+        ).textContent = `$${tipAmount.toFixed(2)}`;
+        document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+      };
+
+      const reset = (x) => {
+        document.getElementById("numberOfPerson").value = "";
+        document.getElementById("bill").value = "";
+        tipPercent = 0;
+        if (lastBtn) {
+          lastBtn.style.backgroundColor = "#00474b";
+          lastBtn.style.color = "#fff";
+        }
+
+        getTip();
+      };
+
+      const checkValue = (x) => {
+        if (!x.value || x.value <= 0) {
+          x.style.border = "2px solid red";
+          x.style.outline = "none";
+          document.querySelector(".bill > p:nth-child(2)").style.visibility =
+            "visible";
+        } else {
+          x.style.border = "2px solid #2dc2ae";
+          document.querySelector(".bill > p:nth-child(2)").style.visibility =
+            "hidden";
+          getTip();
+        }
+      };
+
+      const btnActive = (x) => {
+        if (lastBtn) {
+          lastBtn.style.backgroundColor = "#00474b";
+          lastBtn.style.color = "#fff";
+        }
+
+        tipPercent = x.value;
+        x.style.backgroundColor = "#2dc2ae";
+        x.style.color = "#00474b";
+
+        lastBtn = x;
+
+        getTip();
+      };
+    </script>
+  </body>
+</html>
