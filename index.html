@@ -302,7 +302,13 @@
               >
                 50%
               </button>
-              <input id="customTip" type="text" placeholder="Custom" />
+              <input
+                id="customTip"
+                onchange="tipPercent = this.value"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); getTip()"
+                type="text"
+                placeholder="Custom"
+              />
             </div>
           </div>
           <div class="bill">
