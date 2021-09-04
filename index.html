@@ -239,7 +239,7 @@
   </head>
   <body>
     <div role="main" class="container">
-      <div class="splitter">
+      <div role="banner" class="splitter">
         <p>SPLI <br />TTER</p>
       </div>
       <div class="card">
@@ -253,6 +253,7 @@
               <input
                 type="text"
                 id="bill"
+                name="bill"
                 placeholder="0"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); getTip();"
               />
@@ -314,6 +315,7 @@
               <input
                 type="text"
                 placeholder="0"
+                name="numberOfPerson"
                 id="numberOfPerson"
                 onfocus="checkValue(this)"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); checkValue(this);"
